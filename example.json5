@@ -1,0 +1,8 @@
+// This is json5 demo
+// json5 can write comment in your json
+{
+  key : "Key does not need double quote",
+  // json specific
+  "of" : "course we can use json as json5",
+  trailing : "trailing comma is ok",
+}

@@ -1,0 +1,5 @@
+{
+    "key ": "Key does not need double quote",
+    "of": "course we can use json as json5",
+    "trailing ": "trailing comma is ok"
+}

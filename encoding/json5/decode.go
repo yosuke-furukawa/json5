@@ -16,6 +16,7 @@ import (
 	"reflect"
 	"runtime"
 	"strconv"
+	"strings"
 	"unicode"
 	"unicode/utf16"
 	"unicode/utf8"
@@ -535,6 +536,9 @@ func (d *decodeState) object(v reflect.Value) {
 			}
 			key = k
 		}
+		if item[0] != '"' {
+			key = []byte(strings.Trim(string(key), " "))
+		}
 
 		// Figure out field corresponding to key.
 		var subv reflect.Value
@@ -878,6 +882,9 @@ func (d *decodeState) objectInterface() map[string]interface{} {
 				d.error(errPhase)
 			}
 			key = k
+		}
+		if item[0] != '"' {
+			key = strings.Trim(key, " ")
 		}
 
 		// Read : before value.

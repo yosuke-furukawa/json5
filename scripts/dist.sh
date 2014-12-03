@@ -15,7 +15,7 @@ mkdir -p ./pkg/dist
 
 for PLATFORM in $(find ./pkg -mindepth 1 -maxdepth 1 -type d); do
     PLATFORM_NAME=$(basename ${PLATFORM})
-    ARCHIVE_NAME=gitnpm_${VERSION}_${PLATFORM_NAME}
+    ARCHIVE_NAME=json5_${VERSION}_${PLATFORM_NAME}
 
     if [ $PLATFORM_NAME = "dist" ]; then
         continue

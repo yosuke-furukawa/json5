@@ -3,6 +3,18 @@ gojson5
 
 [JSON5](https://github.com/aseemk/json5) is Yet another JSON.
 
+# INSTALL
+
+```
+$ brew tap yosuke-furukawa/json5
+$ brew install json5
+```
+
+# go get
+```
+$ go get github.con/yosuke-furukawa/gojson5
+```
+
 # example
 
 ```go

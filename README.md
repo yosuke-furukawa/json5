@@ -10,6 +10,13 @@ $ brew tap yosuke-furukawa/json5
 $ brew install json5
 ```
 
+# HOW TO USE
+
+```
+$ json5 -c path/to/test.json5 # output stdout
+$ json5 -c path/to/test.json5 -o path/to/test.json # output path/to/test.json
+```
+
 # go get
 ```
 $ go get github.con/yosuke-furukawa/gojson5

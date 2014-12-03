@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/yosuke-furukawa/gojson5/encoding/json5"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 	"io/ioutil"
 	"os"
 )

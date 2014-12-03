@@ -11,7 +11,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/yosuke-furukawa/gojson5/encoding/json5"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 	"os"
 )
 
@@ -42,7 +42,7 @@ func main() {
 ```
 
 ```
-$ gojson5 example.json5
+$ json5 -c example.json5
 # output
 #{
 #    "key ": "Key does not need double quote",

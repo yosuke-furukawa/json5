@@ -30,7 +30,7 @@ func main() {
 }
 ```
 
-```json
+```js
 // This is json5 demo
 // json5 can write comment in your json
 {

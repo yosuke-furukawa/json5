@@ -244,6 +244,52 @@ func stateBeginValue(s *scanner, c int) int {
 	return s.error(c, "looking for beginning of value")
 }
 
+func stateBeginValueFromComment(s *scanner, c int) int {
+	if c <= ' ' && isSpace(rune(c)) {
+		return scanSkipSpace
+	}
+	if isIdentifier(c) {
+		s.step = stateInStringKey
+		return scanBeginLiteral
+	}
+	switch c {
+	case '{':
+		s.step = stateBeginStringOrEmpty
+		s.pushParseState(parseObjectKey)
+		return scanBeginObject
+	case '[':
+		s.step = stateBeginValueOrEmpty
+		s.pushParseState(parseArrayValue)
+		return scanBeginArray
+	case '"':
+		s.step = stateInString
+		return scanBeginLiteral
+	case '-':
+		s.step = stateNeg
+		return scanBeginLiteral
+	case '0': // beginning of 0.123
+		s.step = state0
+		return scanBeginLiteral
+	case 't': // beginning of true
+		s.step = stateT
+		return scanBeginLiteral
+	case 'f': // beginning of false
+		s.step = stateF
+		return scanBeginLiteral
+	case 'n': // beginning of null
+		s.step = stateN
+		return scanBeginLiteral
+	case '/': // beginning of comment
+		s.step = stateInlineComment
+		return scanSkipInComment
+	}
+	if '1' <= c && c <= '9' { // beginning of 1234.5
+		s.step = state1
+		return scanBeginLiteral
+	}
+	return s.error(c, "looking for beginning of value")
+}
+
 // stateBeginStringOrEmpty is the state after reading `{`.
 func stateBeginStringOrEmpty(s *scanner, c int) int {
 	if c <= ' ' && isSpace(rune(c)) {
@@ -634,7 +680,7 @@ func stateInlineComment(s *scanner, c int) int {
 // stateSkipComment is the state after reading `//`
 func stateSkipComment(s *scanner, c int) int {
 	if c == '\n' {
-		s.step = stateBeginValue
+		s.step = stateBeginValueFromComment
 		return scanSkipInComment
 	}
 	s.step = stateSkipComment

@@ -5,7 +5,7 @@ set -e
 DIR=$(cd $(dirname ${0})/.. && pwd)
 cd ${DIR}
 
-VERSION=${VERSION:-0.1.0}
+VERSION=${VERSION:-0.1.1}
 
 # Compile
 ./scripts/compile.sh

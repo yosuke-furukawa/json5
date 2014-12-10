@@ -64,9 +64,9 @@ func main() {
 $ json5 -c example.json5
 # output
 #{
-#    "key ": "Key does not need double quote",
+#    "key": "Key does not need double quote",
 #    "of": "course we can use json as json5",
-#    "trailing ": "trailing comma is ok"
+#    "trailing": "trailing comma is ok"
 #}
 ```
 

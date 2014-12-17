@@ -1,4 +1,4 @@
-gojson5
+json5 implemented by golang
 ================
 
 [JSON5](https://github.com/aseemk/json5) is Yet another JSON.

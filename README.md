@@ -19,7 +19,7 @@ $ json5 -c path/to/test.json5 -o path/to/test.json # output path/to/test.json
 
 # go get
 ```
-$ go get github.con/yosuke-furukawa/gojson5
+$ go get github.com/yosuke-furukawa/json5
 ```
 
 # example

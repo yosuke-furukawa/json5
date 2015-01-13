@@ -73,7 +73,7 @@ $ json5 -c example.json5
 # TODO
 - block comment
 - multiline string
-- hexadicimal notation
+- hexadecimal notation
 
 
 

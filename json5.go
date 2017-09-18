@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/yosuke-furukawa/json5/encoding/json5"
 	"io/ioutil"
 	"os"
+
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 )
 
 func main() {
@@ -22,16 +23,19 @@ func usage() {
 
 func procArgs() {
 	flag.Usage = usage
-	json5Path := flag.String("c", "", "path/to/file.json5")
-	outputPath := flag.String("o", "", "path/to/file.json")
+	json5Path := flag.String("c", "", "path/to/file.json5, or blank for stdin")
+	outputPath := flag.String("o", "", "path/to/file.json, or blank for stdout")
 	flag.Parse()
+	var file *os.File
+	var err error
 	if *json5Path == "" {
-		usage()
-	}
-	file, err := os.Open(*json5Path)
-	if err != nil {
-		fmt.Println(err)
-		usage()
+		file = os.Stdin
+	} else {
+		file, err = os.Open(*json5Path)
+		if err != nil {
+			fmt.Println(err)
+			usage()
+		}
 	}
 
 	var data interface{}
@@ -48,6 +52,7 @@ func procArgs() {
 	}
 	if *outputPath == "" {
 		fmt.Println(string(b))
+	} else {
+		ioutil.WriteFile(*outputPath, b, 0644)
 	}
-	ioutil.WriteFile(*outputPath, b, 0644)
 }

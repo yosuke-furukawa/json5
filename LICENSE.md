@@ -1,4 +1,4 @@
-Modified BSD License
+BSD License
 ====================
 
 _Copyright © `2019`, `Yosuke Furukawa`_  

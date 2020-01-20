@@ -4,4 +4,5 @@ go:
   - tip
 
 script:
+  - go get ./...
   - go test github.com/yosuke-furukawa/gojson5/encoding/json5

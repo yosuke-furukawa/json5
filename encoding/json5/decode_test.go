@@ -7,6 +7,7 @@ package json5
 import (
 	"bytes"
 	"encoding"
+	"encoding/json"
 	"fmt"
 	"image"
 	"reflect"
@@ -1352,5 +1353,38 @@ func TestInvalidUnmarshal(t *testing.T) {
 		if got := err.Error(); got != tt.want {
 			t.Errorf("Unmarshal = %q; want %q", got, tt.want)
 		}
+	}
+}
+
+type objectDecoder struct {
+	A int
+}
+
+func (o *objectDecoder) UnmarshalJSON(data []byte) error {
+	var v struct {
+		A int `json:"a"`
+	}
+
+	err := json.Unmarshal(data, &v)
+	if err != nil {
+		return err
+	}
+
+	o.A = v.A
+
+	return nil
+}
+
+func TestDecoder_Decode_Unmarshaler(t *testing.T) {
+	j5 := `{
+	// A.
+	"a": 123
+}`
+	var v objectDecoder
+
+	err := NewDecoder(bytes.NewBufferString(j5)).Decode(&v)
+
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
 	}
 }

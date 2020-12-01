@@ -186,7 +186,7 @@ func TestNextValueBig(t *testing.T) {
 	if err != nil {
 		t.Fatalf("nextValue: %s", err)
 	}
-	if len(item) != len(jsonBig) || &item[0] != &jsonBig[0] {
+	if len(item) != len(jsonBig) || item[0] != jsonBig[0] {
 		t.Errorf("invalid item: %d %d", len(item), len(jsonBig))
 	}
 	if len(rest) != 0 {

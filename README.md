@@ -1,6 +1,8 @@
 json5 implemented by golang
 ================
 
+[![Build Status](https://travis-ci.org/yosuke-furukawa/json5.svg?branch=master)](https://travis-ci.org/yosuke-furukawa/json5)
+
 [JSON5](https://github.com/aseemk/json5) is Yet another JSON.
 
 # INSTALL

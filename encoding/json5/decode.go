@@ -231,7 +231,6 @@ func (d *decodeState) scanInlineComment() int {
 		c := int(d.data[d.off])
 		d.off++
 		newOp = d.scan.step(&d.scan, c)
-		fmt.Println("c = ", string(c))
 		if newOp != scanSkipInComment {
 			break
 		}

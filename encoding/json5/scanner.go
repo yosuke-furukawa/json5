@@ -38,17 +38,26 @@ func nextValue(data []byte, scan *scanner) (value, rest []byte, err error) {
 	scan.reset()
 	for i, c := range data {
 		v := scan.step(scan, int(c))
+		if v == scanSkipInComment {
+			value = append(value, ' ')
+		} else {
+			value = append(value, data[i])
+		}
+
 		if v >= scanEnd {
 			switch v {
 			case scanError:
 				return nil, nil, scan.err
 			case scanEnd:
-				return data[0:i], data[i:], nil
+				return value[0 : len(value)-1], data[i:], nil
 			}
 		}
 	}
 	if scan.eof() == scanError {
 		return nil, nil, scan.err
+	}
+	if len(value) > 0 {
+		return value, nil, nil
 	}
 	return data, nil, nil
 }
@@ -711,7 +720,7 @@ func quoteChar(c int) string {
 	}
 
 	// use quoted string with different quotation marks
-	s := strconv.Quote(string(c))
+	s := strconv.Quote(string(rune(c)))
 	return "'" + s[1:len(s)-1] + "'"
 }
 

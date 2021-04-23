@@ -1,8 +1,7 @@
 BSD License
-====================
 
-_Copyright © `2019`, `Yosuke Furukawa`_  
-_All rights reserved._
+Copyright © 2019, Yosuke Furukawa
+All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

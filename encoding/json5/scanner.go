@@ -291,6 +291,12 @@ func stateBeginValueFromComment(s *scanner, c int) int {
 	case '/': // beginning of comment
 		s.step = stateInlineComment
 		return scanSkipInComment
+	case '}':
+		s.step = stateBeginStringOrEmpty
+		return stateBeginStringOrEmpty(s, c)
+	case ']':
+		s.step = stateBeginValueOrEmpty
+		return stateBeginValueOrEmpty(s, c)
 	}
 	if '1' <= c && c <= '9' { // beginning of 1234.5
 		s.step = state1

@@ -935,7 +935,7 @@ func (d *decodeState) literalInterface() interface{} {
 		return s
 
 	default: // number
-		if c != '-' && (c < '0' || c > '9') {
+		if c != '-' && c != '.' && (c < '0' || c > '9') {
 			d.error(errPhase)
 		}
 		n, err := d.convertNumber(string(item))

@@ -229,6 +229,9 @@ func stateBeginValue(s *scanner, c int) int {
 	case '0': // beginning of 0.123
 		s.step = state0
 		return scanBeginLiteral
+	case '.': // beginning of .123
+		s.step = stateDot
+		return scanBeginLiteral
 	case 't': // beginning of true
 		s.step = stateT
 		return scanBeginLiteral
@@ -278,6 +281,9 @@ func stateBeginValueFromComment(s *scanner, c int) int {
 		return scanBeginLiteral
 	case '0': // beginning of 0.123
 		s.step = state0
+		return scanBeginLiteral
+	case '.': // beginning of .123
+		s.step = stateDot
 		return scanBeginLiteral
 	case 't': // beginning of true
 		s.step = stateT
@@ -498,6 +504,10 @@ func stateNeg(s *scanner, c int) int {
 		s.step = state0
 		return scanContinue
 	}
+	if c == '.' {
+		s.step = stateDot
+		return scanContinue
+	}
 	if '1' <= c && c <= '9' {
 		s.step = state1
 		return scanContinue
@@ -705,7 +715,7 @@ func stateError(s *scanner, c int) int {
 // error records an error and switches to the error state.
 func (s *scanner) error(c int, context string) int {
 	s.step = stateError
-	s.err = &SyntaxError{"invalid character " + quoteChar(c) + " " + context, s.bytes}
+	s.err = &SyntaxError{"invalid character " + quoteChar(c) + " " + context + "\nOffset: " + strconv.Itoa(int(s.bytes)), s.bytes}
 	return scanError
 }
 
